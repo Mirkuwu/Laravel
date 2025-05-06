@@ -1,48 +1,100 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+/**
+ * Class User
+ * 
+ * @property int $id
+ * @property string $codUsuario
+ * @property string $apePaterno
+ * @property string $apeMaterno
+ * @property string $nombres
+ * @property string $password
+ * @property string|null $cargo
+ * @property string|null $area
+ * @property Carbon|null $fecNacimiento
+ * @property string|null $sexo
+ * @property string|null $telefono
+ * @property string|null $celular
+ * @property string|null $email
+ * @property string|null $dni
+ * @property string|null $descripcion
+ * @property string|null $estado
+ * @property bool $editado
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
+ * @property Collection|Alumno[] $alumnos
+ * @property Collection|Direccione[] $direcciones
+ * @property Collection|Docente[] $docentes
+ * @property Collection|Infofamiliar[] $infofamiliars
+ * @property Collection|Infoprofesional[] $infoprofesionals
+ *
+ * @package App\Models
+ */
+class User extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+	protected $table = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+	protected $casts = [
+		'fecNacimiento' => 'datetime',
+		'editado' => 'bool'
+	];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	protected $hidden = [
+		'password'
+	];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+	protected $fillable = [
+		'codUsuario',
+		'apePaterno',
+		'apeMaterno',
+		'nombres',
+		'password',
+		'cargo',
+		'area',
+		'fecNacimiento',
+		'sexo',
+		'telefono',
+		'celular',
+		'email',
+		'dni',
+		'descripcion',
+		'estado',
+		'editado'
+	];
+
+	public function alumnos()
+	{
+		return $this->hasMany(Alumno::class, 'Usuario_id');
+	}
+
+	public function direcciones()
+	{
+		return $this->hasMany(Direccione::class, 'Usuario_id');
+	}
+
+	public function docentes()
+	{
+		return $this->hasMany(Docente::class, 'Usuario_id');
+	}
+
+	public function infofamiliars()
+	{
+		return $this->hasMany(Infofamiliar::class, 'Usuario_id');
+	}
+
+	public function infoprofesionals()
+	{
+		return $this->hasMany(Infoprofesional::class, 'Usuario_id');
+	}
 }
