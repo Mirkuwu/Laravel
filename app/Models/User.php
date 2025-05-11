@@ -9,6 +9,8 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User
@@ -44,6 +46,8 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
 	protected $table = 'users';
+
+    use HasApiTokens , Notifiable;
 
 	protected $casts = [
 		'fecNacimiento' => 'datetime',

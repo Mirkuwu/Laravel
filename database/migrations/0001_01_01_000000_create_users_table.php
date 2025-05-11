@@ -34,7 +34,7 @@ return new class extends Migration
 
         Schema::create('docentes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('Usuario_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('Usuario_id')->constrained('users')->onDelete('cascade')->unique();
             $table->string('codDocente', 10);
             $table->char('codUni', 9)->nullable();
             $table->string('depAcademico', 5)->nullable();
@@ -47,7 +47,7 @@ return new class extends Migration
 
         Schema::create('alumnos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('Usuario_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('Usuario_id')->constrained('users')->onDelete('cascade')->unique();
             $table->string('codAlumno', 10);
             $table->char('especialidad', 2);
             $table->char('espAnterior', 2)->nullable();
