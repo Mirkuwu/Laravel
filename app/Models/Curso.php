@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property Collection|CursoProfesor[] $curso_profesors
+ * @property Collection|Docente[] $docentes
  *
  * @package App\Models
  */
@@ -56,8 +56,10 @@ class Curso extends Model
 		'verCurricular'
 	];
 
-	public function curso_profesors()
+	public function docentes()
 	{
-		return $this->hasMany(CursoProfesor::class);
+		return $this->belongsToMany(Docente::class)
+					->withPivot('id', 'seccion')
+					->withTimestamps();
 	}
 }

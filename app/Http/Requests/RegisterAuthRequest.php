@@ -22,7 +22,7 @@ class RegisterAuthRequest extends FormRequest
     public function rules(): array
     {
         return array_merge([
-            'usuario' => 'required|string|max:10',
+            'codUsuario' => 'required|string|max:10',
             'password' => 'required|string',
             'apePaterno' => 'required|string|max:50',
             'apeMaterno' => 'required|string|max:50',

@@ -12,14 +12,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Matricula
- * 
+ *
  * @property int $id
  * @property int $semestre_id
  * @property Carbon $fec_ingreso
  * @property string $ciclo
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Semestre $semestre
  * @property Collection|Alumno[] $alumnos
  * @property Collection|MatriculaCurso[] $matricula_cursos
@@ -53,6 +53,10 @@ class Matricula extends Model
 					->withTimestamps();
 	}
 
+    public function matricula_alumnos()
+    {
+        return $this->hasMany(MatriculaAlumno::class);
+    }
 	public function matricula_cursos()
 	{
 		return $this->hasMany(MatriculaCurso::class);

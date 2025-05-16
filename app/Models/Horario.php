@@ -7,14 +7,15 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Horario
- * 
+ *
  * @property int $id
  * @property string $codHorario
- * @property int $curso_profesor_id
+ * @property int $curso_docente_id
  * @property int $aula_id
  * @property string $dia
  * @property string $hora
@@ -23,9 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $estado
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Aula $aula
- * @property CursoProfesor $curso_profesor
+ * @property CursoDocente $curso_docente
+ * @property Collection|MatriculaCurso[] $matricula_cursos
  *
  * @package App\Models
  */
@@ -34,7 +36,7 @@ class Horario extends Model
 	protected $table = 'horarios';
 
 	protected $casts = [
-		'curso_profesor_id' => 'int',
+		'curso_docente_id' => 'int',
 		'aula_id' => 'int',
 		'tope' => 'int',
 		'estado' => 'bool'
@@ -42,7 +44,7 @@ class Horario extends Model
 
 	protected $fillable = [
 		'codHorario',
-		'curso_profesor_id',
+		'curso_docente_id',
 		'aula_id',
 		'dia',
 		'hora',
@@ -56,8 +58,13 @@ class Horario extends Model
 		return $this->belongsTo(Aula::class);
 	}
 
-	public function curso_profesor()
+	public function curso_docente()
 	{
-		return $this->belongsTo(CursoProfesor::class);
+		return $this->belongsTo(CursoDocente::class);
+	}
+
+	public function matricula_cursos()
+	{
+		return $this->hasMany(MatriculaCurso::class);
 	}
 }

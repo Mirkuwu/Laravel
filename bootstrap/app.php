@@ -12,7 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'token.scope' => \App\Http\Middleware\CheckTokenScope::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

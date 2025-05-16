@@ -12,9 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 
+
 /**
  * Class User
- * 
+ *
  * @property int $id
  * @property string $codUsuario
  * @property string $apePaterno
@@ -34,7 +35,7 @@ use Illuminate\Notifications\Notifiable;
  * @property bool $editado
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Collection|Alumno[] $alumnos
  * @property Collection|Direccione[] $direcciones
  * @property Collection|Docente[] $docentes
@@ -55,9 +56,8 @@ class User extends Model
 	];
 
 	protected $hidden = [
-		'password'
+		'password', 'remember_token',
 	];
-
 	protected $fillable = [
 		'codUsuario',
 		'apePaterno',

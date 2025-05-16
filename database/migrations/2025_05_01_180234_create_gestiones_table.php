@@ -73,28 +73,23 @@ return new class extends Migration
             $table->id();
             $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
             $table->foreignId('matricula_id')->constrained('matriculas')->onDelete('cascade');
+            $table->unique(['alumno_id', 'matricula_id']);
             $table->timestamps();
         });
 
-        Schema::create('curso_profesor', function (Blueprint $table) {
+        Schema::create('curso_docente', function (Blueprint $table) {
             $table->id();
             $table->foreignId('curso_id')->constrained('cursos');
-            $table->foreignId('profesor_id')->constrained('docentes');
+            $table->foreignId('docente_id')->constrained('docentes');
             $table->string('seccion', 10);
             $table->timestamps();
         });
 
-        Schema::create('matricula_cursos', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('matricula_id')->constrained('matriculas')->onDelete('cascade');
-            $table->foreignId('curso_profesor_id')->constrained('curso_profesor')->onDelete('cascade');
-            $table->timestamps();
-        });
 
         Schema::create('horarios', function (Blueprint $table) {
             $table->id();
             $table->string('codHorario',10);
-            $table->foreignId('curso_profesor_id')->constrained('curso_profesor')->onDelete('cascade');
+            $table->foreignId('curso_docente_id')->constrained('curso_docente')->onDelete('cascade');
             $table->foreignId('aula_id')->constrained('aulas')->onDelete('cascade');
             $table->enum('dia', ['LU', 'MA', 'MI', 'JU', 'VI', 'SA']);
             $table->string('hora', 5);
@@ -103,6 +98,14 @@ return new class extends Migration
             $table->boolean('estado')->default(true);
             $table->timestamps();
         });
+
+        Schema::create('matricula_cursos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('matricula_id')->constrained('matriculas')->onDelete('cascade');
+            $table->foreignId('horario_id')->constrained('horarios')->onDelete('cascade'); //cambio de curso_profesor_id a horarios_id
+            $table->timestamps();
+        });
+
     }
     /**
      * Reverse the migrations.

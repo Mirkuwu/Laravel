@@ -14,11 +14,11 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id
  * @property int $matricula_id
- * @property int $curso_profesor_id
+ * @property int $horario_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property CursoProfesor $curso_profesor
+ * @property Horario $horario
  * @property Matricula $matricula
  *
  * @package App\Models
@@ -29,17 +29,17 @@ class MatriculaCurso extends Model
 
 	protected $casts = [
 		'matricula_id' => 'int',
-		'curso_profesor_id' => 'int'
+		'horario_id' => 'int'
 	];
 
 	protected $fillable = [
 		'matricula_id',
-		'curso_profesor_id'
+		'horario_id'
 	];
 
-	public function curso_profesor()
+	public function horario()
 	{
-		return $this->belongsTo(CursoProfesor::class);
+		return $this->belongsTo(Horario::class);
 	}
 
 	public function matricula()

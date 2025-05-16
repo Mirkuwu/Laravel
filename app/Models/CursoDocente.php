@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class CursoProfesor
+ * Class CursoDocente
  * 
  * @property int $id
  * @property int $curso_id
- * @property int $profesor_id
+ * @property int $docente_id
  * @property string $seccion
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -23,22 +23,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property Curso $curso
  * @property Docente $docente
  * @property Collection|Horario[] $horarios
- * @property Collection|MatriculaCurso[] $matricula_cursos
  *
  * @package App\Models
  */
-class CursoProfesor extends Model
+class CursoDocente extends Model
 {
-	protected $table = 'curso_profesor';
+	protected $table = 'curso_docente';
 
 	protected $casts = [
 		'curso_id' => 'int',
-		'profesor_id' => 'int'
+		'docente_id' => 'int'
 	];
 
 	protected $fillable = [
 		'curso_id',
-		'profesor_id',
+		'docente_id',
 		'seccion'
 	];
 
@@ -49,16 +48,11 @@ class CursoProfesor extends Model
 
 	public function docente()
 	{
-		return $this->belongsTo(Docente::class, 'profesor_id');
+		return $this->belongsTo(Docente::class);
 	}
 
 	public function horarios()
 	{
 		return $this->hasMany(Horario::class);
-	}
-
-	public function matricula_cursos()
-	{
-		return $this->hasMany(MatriculaCurso::class);
 	}
 }
