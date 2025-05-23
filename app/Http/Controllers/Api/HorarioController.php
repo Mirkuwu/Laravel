@@ -66,6 +66,7 @@ class HorarioController extends Controller
             ->flatMap(function ($cursoDocente) {
                 return $cursoDocente->horarios->map(function ($horario) use ($cursoDocente) {
                     return [
+                        'horario_id' => $horario->id,
                         'curso' => $cursoDocente->curso->nomCursos,
                         'codCurso' => $cursoDocente->curso->codCursos,
                         'seccion' => $cursoDocente->seccion,

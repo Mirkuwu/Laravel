@@ -10,8 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
-
 
 /**
  * Class User
@@ -46,9 +44,8 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Model
 {
+    use HasApiTokens;
 	protected $table = 'users';
-
-    use HasApiTokens , Notifiable;
 
 	protected $casts = [
 		'fecNacimiento' => 'datetime',
@@ -56,8 +53,9 @@ class User extends Model
 	];
 
 	protected $hidden = [
-		'password', 'remember_token',
+		'password'
 	];
+
 	protected $fillable = [
 		'codUsuario',
 		'apePaterno',
@@ -101,4 +99,7 @@ class User extends Model
 	{
 		return $this->hasMany(Infoprofesional::class, 'Usuario_id');
 	}
+    public function asistencias() {
+    return $this->hasMany(Asistencia::class, 'usuario_id');
+    }
 }

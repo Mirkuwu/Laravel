@@ -67,4 +67,7 @@ class Horario extends Model
 	{
 		return $this->hasMany(MatriculaCurso::class);
 	}
+    public function asistencias() {
+    return $this->hasMany(Asistencia::class);
+    }
 }
