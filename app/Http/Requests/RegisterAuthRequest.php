@@ -42,7 +42,7 @@ class RegisterAuthRequest extends FormRequest
     private function docenteRules(): array
     {
         return [
-            'codUni' => 'nullable|string|max:9',
+            'codUni' => 'nullable|string|max:10',
             'depAcademico' => 'nullable|string|max:5',
             'dedicacion' => 'nullable|string|max:10',
             'observacion' => 'nullable|string',

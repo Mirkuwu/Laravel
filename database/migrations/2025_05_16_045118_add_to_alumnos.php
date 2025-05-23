@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
- public function up()
+ /* public function up()
     {
 
         Schema::table('alumnos', function (Blueprint $table) {
@@ -30,5 +30,5 @@ return new class extends Migration
         Schema::table('matricula_alumnos', function (Blueprint $table) {
             $table->dropUnique(['alumno_id', 'matricula_id']);
         });
-    }
+    } */
 };

@@ -52,6 +52,7 @@ class AuthController extends Controller
 
     public function register(RegisterAuthRequest $request)
     {
+
         $usuario = User::create([
             'codUsuario' => $request->input('codUsuario'),
             'password' => bcrypt($request->input('password')),
@@ -72,6 +73,7 @@ class AuthController extends Controller
     elseif ($request->cargo === 'docente') {
         Docente::create([
             'Usuario_id' => $usuario->id,
+            'codDocente' => $request->codUsuario,
             'codUni' => $request->codUni,
             'depAcademico' => $request->depAcademico,
             'dedicacion' => $request->dedicacion,
