@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\HorarioController;
 use App\Http\Controllers\api\InformacionController;
 
 //falta organizar las rutas
+use App\Http\Controllers\api\PruebaController;
+Route::get('/usuarios', [PruebaController::class, 'listar_usuarios']);
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/alfa', [AuthController::class, 'register']);
@@ -42,7 +44,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/info-profesional/{id}', [InformacionController::class, 'destroyInfoProfesional']);
 });
 
-Route::middleware(['auth:sanctum', 'token.scope:docente'])->group(function () {
+Route::middleware(['auth:sanctum', 'token.scope:(docente, admin)'])->group(function () {
     Route::get('/asistencias', [AsistenciaController::class, 'asistenciaAlumnos']);
-    Route::post('/asistencias/{id}', [AsistenciaController::class, 'storaAsistenciaAlumno']);
+    Route::post('/asistencias/{id}', [AsistenciaController::class, 'storeAsistenciaAlumno']);
 });
+

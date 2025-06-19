@@ -10,6 +10,7 @@ use App\Models\Alumno;
 use App\Models\Docente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Exception;
 
 class AuthController extends Controller
@@ -21,12 +22,20 @@ class AuthController extends Controller
             $user = User::where('codUsuario', $request->codUsuario)->first();
             $scope = strtolower($user->cargo);
 
+/*         dispatch(function() use ($user) {
+            $user->tokens()
+                ->where('created_at', '<', now()->subDays(1)) 
+                ->delete();
+
+            Log::info("Tokens antiguos eliminados para usuario: {$user->codUsuario}");
+        })->afterResponse(); // Se ejecutará después de enviar la respuesta al cliente
+
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json([
                     'message' => 'Credenciales inválidas',
                 ], 401);
             }
-
+ */
             return response()->json([
                 'message' => 'Login exitoso',
                 'user' => $user,

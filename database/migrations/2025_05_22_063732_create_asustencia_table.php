@@ -13,13 +13,13 @@ return new class extends Migration
     {
     Schema::create('asistencias', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('horario_id')->constrained('horarios')->onDelete('cascade'); // Relación con la clase/horario
-        $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade'); // Usuario (alumno o docente)
-        $table->date('fecha'); // Fecha de la asistencia
-        $table->char('estado', 1); // Ej: 'P' (Presente), 'A' (Ausente), 'T' (Tardanza)
-        $table->time('hora_entrada')->nullable(); // Hora de entrada registrada
-        $table->time('hora_salida')->nullable(); // Hora de salida registrada
-        $table->text('observacion')->nullable(); // Justificaciones o notas
+        $table->foreignId('horario_id')->constrained('horarios')->onDelete('cascade');
+        $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
+        $table->date('fecha');
+        $table->char('estado', 1);
+        $table->time('hora_entrada')->nullable();
+        $table->time('hora_salida')->nullable();
+        $table->text('observacion')->nullable();
         $table->timestamps();
     });
     }

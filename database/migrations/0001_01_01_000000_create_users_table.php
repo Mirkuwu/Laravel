@@ -30,6 +30,11 @@ return new class extends Migration
             $table->char('estado', 1)->nullable();
             $table->boolean('editado')->default(false);
             $table->timestamps();
+
+            $table->index(['apePaterno', 'apeMaterno']);
+            $table->index('dni');
+            $table->index('cargo');
+            $table->index('estado');
         });
 
         Schema::create('docentes', function (Blueprint $table) {

@@ -117,9 +117,8 @@ class InformacionController extends Controller
         return response()->json(['mensaje' => 'Información profesional eliminada'], 200);
     }
 
-    /**
-     * Método privado para verificar que el recurso pertenece al usuario autenticado
-     */
+
+    
     private function authorizeOwnership(Model $model, Request $request)
     {
         if ($model->Usuario_id !== $request->user()->id) {

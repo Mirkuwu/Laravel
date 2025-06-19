@@ -41,7 +41,7 @@ class AsistenciaController extends Controller
             'hora_entrada' => $request->hora_entrada,
             'hora_salida' => $request->hora_salida
         ]);
-
+        //dd($asistencia)->suggest();
         return response()->json([
             'asistencia' => $asistencia,
         ]);

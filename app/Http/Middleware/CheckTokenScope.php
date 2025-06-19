@@ -15,10 +15,18 @@ class CheckTokenScope
      */
     public function handle(Request $request, Closure $next, $scope)
     {
-        if (! $request->user() || ! $request->user()->tokenCan($scope)) {
-            return response()->json(['message' => 'No autorizado'], 403);
-        }
+    $user = $request->user();
 
-        return $next($request);
+    if (! $user) {
+        return response()->json(['message' => 'No autorizado'], 403);
+    }
+
+    foreach ($scopes as $scope) {
+        if ($user->tokenCan($scope)) {
+            return $next($request);
+        }
+    }
+
+    return response()->json(['message' => 'No autorizado'], 403);
     }
 }

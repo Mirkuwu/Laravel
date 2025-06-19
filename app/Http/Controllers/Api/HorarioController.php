@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 */
 class HorarioController extends Controller
 {
+
+
     public function horarioAlumno(Request $request)
     {
         $user = $request->user();
@@ -52,6 +54,8 @@ class HorarioController extends Controller
             'horario' => $horarios,
         ]);
     }
+
+
     public function horarioDocente(Request $request){
         $user = $request->user();
         $docente = Docente::where('Usuario_id', $user->id)->first();
@@ -80,4 +84,21 @@ class HorarioController extends Controller
             'horario' => $horarios,
         ]);
     }
+    
+    public function storeHorario (Request $request){
+        $horario = Horario::create([
+        'codHorario' =>$request->codHorario,
+	    'curso_docente_id' =>$request->curso_docente_id,
+		'aula_id'=>$request->aula_id,
+		'dia'=>$request->dia,
+		'hora'=>$request->hora,
+		'tipo_sesion'=>$request->tipo_sesion,
+		'tope'=>$request->tope,
+		'estado'=>$request->estado,
+        ]);
+        return respone()->json([
+            'message' => "Horario creado correctamente"
+        ]);
+    }
+
 }
